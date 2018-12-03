@@ -208,4 +208,12 @@ class BrokenRotSquareView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity: Activity) : BrokenRotSquareView {
+            val view : BrokenRotSquareView = BrokenRotSquareView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
