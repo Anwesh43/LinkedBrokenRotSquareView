@@ -22,7 +22,7 @@ val scGap : Float = 0.05f
 
 fun Int.getInverse() : Float = 1f / this
 
-fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.getInverse(), Math.max(0f, i * n.getInverse())) * n
+fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.getInverse(), Math.max(0f, this - i * n.getInverse())) * n
 
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
 
@@ -45,8 +45,9 @@ fun Canvas.drawBRSNode(i : Int, scale : Float, paint : Paint) {
         val sc : Float = sc1.divideScale(j, bars)
         save()
         scale(1f - 2 * j, 1f)
-        rotate(90f * sc)
-        drawRect(RectF(-size/2, -size - size/4, 0f, -size/4), paint)
+        translate(0f, -size / 4)
+        rotate(-90f * sc)
+        drawRect(RectF(-size/2, -2 * size, 0f, 0f), paint)
         restore()
     }
     restore()
