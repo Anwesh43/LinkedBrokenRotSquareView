@@ -183,4 +183,27 @@ class BrokenRotSquareView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BrokenRotSquareView) {
+
+        private val animator : Animator = Animator(view)
+
+        private val brs : BrokenRotSquare = BrokenRotSquare(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            brs.draw(canvas, paint)
+            animator.animate {
+                brs.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            brs.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
